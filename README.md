@@ -1,5 +1,15 @@
 Legacy Code Modernizer using Context Optimization
 
+## Live Demo
+
+Frontend (Vercel):  
+https://legacy-code-modernizer.vercel.app
+
+Backend API (Render):  
+https://legacy-code-modernizer-backend.onrender.com
+
+API Docs:  
+https://legacy-code-modernizer-backend.onrender.com/docs
 
 Problem Statement
 
@@ -126,11 +136,13 @@ Improved output relevance
 
 
 API Documentation
-Base URL
-http://127.0.0.1:8000
-Interactive Docs
-http://127.0.0.1:8000/docs
-Endpoint: Convert Code
+Live API
+
+Base URL  
+https://legacy-code-modernizer-backend.onrender.com
+
+Interactive Docs  
+https://legacy-code-modernizer-backend.onrender.com/docs
 
 
 POST /convert
