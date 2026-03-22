@@ -468,7 +468,7 @@ export default function App() {
    setResult(null);
 
    try {
-    const res = await fetch("https://legacy-code-modernizer-backend.onrender.com/convert", {
+    const res = await fetch("https://legacy-code-modernizer-backend.onrender.com/docs#/default/convert_convert_post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
