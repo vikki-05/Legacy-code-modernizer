@@ -468,16 +468,16 @@ export default function App() {
    setResult(null);
 
    try {
-    const res = await fetch("https://legacy-code-modernizer-backend.onrender.com/docs#/default/convert_convert_post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        code: code,
-        function_name: "main"
-      })
-    });
+      const res = await fetch("https://legacy-code-modernizer-backend.onrender.com/convert", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          code: code,
+          function_name: "main"
+        })
+      });
 
     const data = await res.json();
     console.log("BACKEND RESPONSE:", data);
