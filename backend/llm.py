@@ -1,18 +1,26 @@
-from transformers import pipeline
-
-print("Loading lightweight model...")
-
-# ✅ lightweight model (works on Render)
-generator = pipeline("text-generation", model="gpt2")
-
+print("Using lightweight converter...")
 
 def convert_code(context):
-    prompt = f"""
-Convert this code into clean, readable Python:
+    """
+    Lightweight code formatter (no ML model)
+    Works on free deployment
+    """
 
-{context}
-"""
+    lines = context.split("\n")
+    formatted = []
 
-    result = generator(prompt, max_length=200, num_return_sequences=1)
+    indent = 0
 
-    return result[0]["generated_text"]
+    for line in lines:
+        line = line.strip()
+
+        # simple formatting rules
+        if line.endswith("}"):
+            indent -= 1
+
+        formatted.append("    " * max(indent, 0) + line)
+
+        if line.endswith("{"):
+            indent += 1
+
+    return "\n".join(formatted)
