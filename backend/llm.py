@@ -9,12 +9,16 @@ model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-base")
 
 def convert_code(context):
     prompt = f"""
-Convert the following code into clean, well-formatted Python code.
-Use proper indentation and line breaks.
+Convert this code into clean, properly formatted Python.
+
+- Use proper indentation
+- Add line breaks
+- Make code readable
 
 Code:
 {context}
 """
+
 
     inputs = tokenizer(prompt, return_tensors="pt", truncation=True)
     outputs = model.generate(**inputs, max_new_tokens=200)

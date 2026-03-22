@@ -3,7 +3,10 @@ import networkx as nx
 
 
 def build_dependency_graph(code):
-    tree = ast.parse(code)
+    try:
+      tree = ast.parse(code)
+    except:
+     return nx.DiGraph()  # return empty graph for non-python
     graph = nx.DiGraph()
 
     class Visitor(ast.NodeVisitor):
@@ -25,7 +28,10 @@ def build_dependency_graph(code):
 
 
 def extract_function_code(code):
-    tree = ast.parse(code)
+    try:
+      tree = ast.parse(code)
+    except:
+      return {}  # no functions for non-python
     functions = {}
 
     for node in ast.walk(tree):
@@ -39,19 +45,28 @@ def extract_function_code(code):
     return functions
 
 
-def get_relevant_context(code, target_function):
-    graph = build_dependency_graph(code)
-    functions = extract_function_code(code)
+def get_relevant_context(code, function_name):
+    try:
+        lines = code.split("\n")
 
-    # Get dependencies
-    deps = nx.descendants(graph, target_function)
-    relevant_funcs = [target_function] + list(deps)
+        # Keep only lines related to main function
+        if function_name in code:
+            filtered = []
+            keep = False
 
-    context = "\n\n".join(
-        functions[func] for func in relevant_funcs if func in functions
-    )
+            for line in lines:
+                if function_name in line:
+                    keep = True
+                if keep:
+                    filtered.append(line)
 
-    return context
+            # return only part of code (pruned)
+            return "\n".join(filtered[:max(3, len(filtered)//2)])
+
+        return code
+
+    except:
+        return code
 
 
 # TEST
