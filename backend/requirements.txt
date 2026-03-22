@@ -1,5 +1,6 @@
 fastapi
 uvicorn
-tree_sitter
+pydantic
+transformers
+torch
 networkx
-openai
